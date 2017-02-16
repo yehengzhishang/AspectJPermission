@@ -1,0 +1,27 @@
+
+/*-----------step 2.3 起 -------------*/
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile gradleApi()//gradle sdk
+    compile localGroovy()//groovy sdk
+    compile 'com.android.tools.build:gradle:2.2.2'
+    //以下两项为AspcetJ所用
+    compile 'org.javassist:javassist:3.20.0-GA'
+    compile 'org.aspectj:aspectjtools:1.8.1'
+}
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: uri('../repo')) //发布到本地的位置(可以自己写 但是一定要能找到)
+        //以下三项 请细心写好，在Project的Build.Gradle调用
+        pom.groupId = 'com.yu.zz'
+        pom.artifactId ='gradleplugin'
+        pom.version = '1.0.0'
+    }
+}
+
+repositories {
+    jcenter()
+}
+/*-----------step 2.3 终-------------*/
